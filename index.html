@@ -16,7 +16,7 @@
 
     .calculator-card {
       width: 100%;
-      max-width: 500px;
+      max-width: 550px;
       background: white;
       border-radius: 15px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.1);
@@ -55,9 +55,10 @@
     th {
       background-color: #003c78;
       color: white;
-      padding: 12px 8px;
-      font-size: 13px;
+      padding: 12px 5px;
+      font-size: 11px; /* ปรับขนาดตัวอักษรหัวตารางให้พอดี */
       text-transform: uppercase;
+      text-align: center;
     }
 
     td {
@@ -65,8 +66,7 @@
       border: 1px solid #eee;
     }
 
-    /* ขยายช่อง Type ให้กว้างขึ้น */
-    .col-type { width: 40%; }
+    .col-media { width: 35%; }
     
     select, input {
       width: 100%;
@@ -74,7 +74,7 @@
       border: 1px solid #ccc;
       border-radius: 5px;
       box-sizing: border-box;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     select { cursor: pointer; background-color: #f9f9f9; }
@@ -87,7 +87,6 @@
       border: 1px solid #e9ecef;
     }
 
-    /* แสดงชื่อ Type ที่เลือก */
     #selected-type-display {
       font-size: 14px;
       color: #666;
@@ -98,7 +97,7 @@
     .total-display {
       color: #28a745;
       font-weight: 800;
-      font-size: 24px;
+      font-size: 28px;
     }
 
     .footer-text {
@@ -123,17 +122,17 @@
     <table>
       <thead>
         <tr>
-          <th class="col-type">Type (Select Full Name)</th>
+          <th class="col-media">Media</th>
           <th>Hours</th>
-          <th>Rate</th>
-          <th>Price ($)</th>
+          <th>rate: mmscf/hrs</th>
+          <th>$mmscf</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>
             <select id="type-select" onchange="applyPreset()">
-              <option value="">-- Choose Type --</option>
+              <option value="">-- Choose Media --</option>
               <option value="gas_pacpp">Gas / PACPP (Full Operations)</option>
               <option value="condy">CONDY PACPP (Condensate)</option>
               <option value="remote">Gas Remote Platform (Offshore)</option>
@@ -147,22 +146,22 @@
     </table>
 
     <div class="result-section">
-      <div id="selected-type-display">Please select an operation type</div>
+      <div id="selected-type-display">Please select media type</div>
       <div class="total-display" id="grand-total">
         $0.00
       </div>
-      <div style="font-size: 11px; color: #999; margin-top: 5px;">ESTIMATED SAVINGS</div>
+      <div style="font-size: 13px; color: #28a745; font-weight: bold; margin-top: 5px; letter-spacing: 1px;">SAVE COST</div>
     </div>
 
     <div class="footer-text">
       © Chevron — Internal Use Only<br>
-      Automated Estimation Tool
+      Automated Estimation Tool (Updated 2026)
     </div>
   </div>
 </div>
 
 <script>
-  // ข้อมูล Preset
+  // ข้อมูล Preset (ใช้ค่าเดิมตามโค้ดต้นฉบับของคุณ)
   const presets = {
     gas_pacpp: { label: "Gas / PACPP (Full Operations)", hours: 1, rate: 9.17, price: 6000 },
     condy:     { label: "CONDY PACPP (Condensate)",     hours: 1, rate: 396,  price: 60 },
@@ -179,9 +178,9 @@
       document.getElementById('val-p').value = data.price;
       document.getElementById('selected-type-display').innerText = "Selected: " + data.label;
     } else {
-      document.getElementById('selected-type-display').innerText = "No type selected";
+      document.getElementById('selected-type-display').innerText = "No media selected";
     }
-    calculate(); // คำนวณทันทีที่เลือก
+    calculate(); 
   }
 
   function calculate() {
